@@ -1,0 +1,8 @@
+{
+  "name": "variable_seasons",
+  "description": "Baseline, plus a random change of up to 6% more or less sunlight in each Mars year (seeded, so every run is identical).",
+  "extends": "baseline",
+  "model": {
+    "eta_max": 0.06
+  }
+}

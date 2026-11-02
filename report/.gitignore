@@ -1,0 +1,5 @@
+/build/*
+!/build/report.pdf
+.DS_Store
+*~
+*.swp

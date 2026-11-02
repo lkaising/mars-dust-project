@@ -1,0 +1,36 @@
+% !TeX root = ../report.tex
+\section{Results}
+\label{sec:results}
+
+\newcommand{\switchwidth}{0.6\linewidth}
+\newcommand{\sweepwidth}{0.6\linewidth}
+
+All simulations use MATLAB's stiff solver \texttt{ode15s}~\cite{shampine1997} with relative and absolute tolerances of $10^{-8}$ and $10^{-10}$. Each model year is solved separately, so changes in $\eta_n$ occur only at solver restarts, and output is saved every sol. Runs start at $A = 0.5$, $S = 0.9$ and discard 20 warm-up years. A model global event begins when $A$ rises through the chosen cutoff of 5 after falling below 2 since the last event; observed global storms can reach optical depths of 5 or more~\cite{smith2019}.
+
+Figure~\ref{fig:climate-record} shows 30 years of a variable-seasons simulation, with both state variables evolving. Although every year has a high-forcing season, the record contains only 11 global events, 1.9 to 5.0 years apart, and three smaller events that stay below $A = 5$. Each global event depletes $S$ to nearly zero, and $S$ then replenishes over the following years, so the reservoir links each event to the next.
+
+The close-up in Figure~\ref{fig:climate-record}b, chosen for illustration rather than as a typical case, shows the rate balance within one event. Once dust-heating feedback turns the switch on, dust input far exceeds settling and $A$ rises from 1 to 5 in about a week. The same lifting depletes $S$ from about 0.6 before the event to 0.2 at the peak. By then shading has also partly closed the switch, so input falls below settling and $dA/dt$ changes sign. After the peak, the wind strengthens again as $A$ falls, but $S$ keeps declining toward 0.01, so input stays below settling and $A$ decays, at first more slowly than settling alone would allow.
+
+\begin{wrapfigure}{r}{\switchwidth}
+  \centering
+  \reportfigure{storm_switch.pdf}{Storm-switch diagram}
+  \caption{Analysis of the atmospheric equation in~\eqref{eq:state}, with forcing fixed at the baseline perihelion value $F = 1.18$ and $S$ fixed in each calculation; it is not a simulated trajectory. (a)~Net rate against $A$ for $S = 0.10$ and $0.18$; arrows give the direction of change. (b)~Equilibrium $A$ against $S$, with orange guides at the two examples. Solid lines and filled circles are stable, and dashed lines and open circles unstable, to changes in $A$ alone; diamonds mark folds. The lower plot enlarges the outlined near-calm region.}
+  \label{fig:storm-switch}
+\end{wrapfigure}
+Because $A$ changes within days to weeks while $S$ replenishes over years, it is useful to examine the atmospheric equation alone. Figure~\ref{fig:storm-switch} evaluates the same net-rate expression as Figure~\ref{fig:climate-record}b, but holds $S$ and $F$ fixed and varies $A$. This analysis does not assume that $S$ stays constant during an event; in the evolving storm of Figure~\ref{fig:climate-record}b, $S$ falls rapidly. Zeros of this rate are equilibria: a zero where the rate changes from positive to negative as $A$ increases is stable, and one where it changes from negative to positive is unstable~\cite{strogatz2015}.
+
+At $S = 0.10$ the near-calm rate has two zeros: a stable calm state at $A \approx 0.52$ and an unstable threshold at $A \approx 0.60$. Small disturbances return to calm, while $A$ pushed past the threshold rises to a third, stable equilibrium near 5.7. At $S = 0.18$ the rate is positive throughout the near-calm range, so the calm state and threshold no longer exist, and $A$ starting there rises toward the only equilibrium, near 7.9.
+
+Figure~\ref{fig:storm-switch}b follows the equilibria as $S$ changes. At a fold, two equilibria merge and disappear, and the rate touches zero without changing sign: the calm state and threshold merge at $S \approx 0.142$, and the dusty state and threshold at $S \approx 0.009$. More available surface dust therefore changes which atmospheric states exist, not only how large an event becomes. Because $S$ falls during an event and $F$ changes through the year, however, $S \approx 0.142$ is not an exact onset threshold, and losing the calm state does not guarantee a global event within one season.
+
+\begin{wrapfigure}{r}{\sweepwidth}
+  \centering
+  \reportfigure{recharge_sweep.pdf}{Recharge sweep}
+  \caption{Full-model sweep of $T_r$ (1 to 8 Mars years, step 0.25), other parameters at baseline; each run records 100 Mars years after a 20-year warm-up. (a)~Identical seasons, one run per $T_r$. (b)~Variable seasons, ten runs per $T_r$, reusing seeds 42--51 at every $T_r$; the band spans the lowest to highest run, not a confidence interval. (c)~Intervals between global-event onsets at $T_r = 3$, computed within each run, excluding incomplete waits at the record ends, then pooled (49 identical-season and 284 variable-season intervals); each distribution sums to 100\%, in one-year bins centered on integers.}
+  \label{fig:recharge-sweep}
+\end{wrapfigure}
+Figure~\ref{fig:storm-switch} varies the amount of available surface dust, $S$; Figure~\ref{fig:recharge-sweep} varies how quickly the reservoir replenishes, through $T_r$. Because the equilibrium diagram cannot say when a seasonal trajectory reaches a global event, this experiment returns to the full model, with both variables and the forcing evolving. Each run reports the share of years whose maximum $A$ reaches 2 or 5. This counts years above each threshold, not separate events, since an episode above $A = 2$ can continue into the next year.
+
+With identical seasons (Figure~\ref{fig:recharge-sweep}a), events reaching $A \ge 2$ recur on regular one-, two-, and three-year schedules as $T_r$ increases to 7.75 (checked against onset intervals). Global-event frequency, however, does not fall steadily. Within each schedule, slower replenishment leaves less available surface dust when each event begins, so peaks decline until events keep their timing but no longer reach $A = 5$. With variable seasons (Figure~\ref{fig:recharge-sweep}b), these steps are smoothed. At the baseline $T_r = 3$, global events occur in 50\% of years with identical seasons and 29.4\% with variable seasons (27--33\% across ten 100-year runs); the 11 events in Figure~\ref{fig:climate-record} come from a shorter, 30-year portion of the seed-42 run.
+
+Annual occurrence does not describe how events are spaced, so Figure~\ref{fig:recharge-sweep}c compares intervals between global-event onsets at the same baseline. With identical seasons, every interval is exactly two years. With variable seasons, intervals range from about 1.9 to 10 years, with a mean of 3.4 years; two-year intervals are most common, but three- to five-year intervals are frequent. Because $S$ carries over between years, one season's outcome also shifts later events.

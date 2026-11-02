@@ -1,0 +1,8 @@
+{
+  "name": "recharge_sweep",
+  "description": "Variable seasons recorded over 100 Mars years per run instead of 30, for steadier statistics in the refill-time sweep (Figure 3).",
+  "extends": "variable_seasons",
+  "run": {
+    "years": 100
+  }
+}

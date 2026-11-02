@@ -1,0 +1,66 @@
+\usepackage{fontspec}
+\setmainfont{Times New Roman}[Scale=1.00375]
+\XeTeXgenerateactualtext=1
+
+\usepackage[margin=1in]{geometry}
+\pagestyle{plain}
+\linespread{1.07}
+\usepackage[skip=7.25bp plus 1pt minus 0.5pt]{parskip}
+\frenchspacing
+\usepackage{ragged2e}
+\AtBeginDocument{\RaggedRight\setlength{\emergencystretch}{3em}}
+\hyphenpenalty=10000
+
+\usepackage{titlesec}
+\titleformat*{\section}{\normalfont\normalsize\bfseries}
+\titleformat*{\subsection}{\normalfont\normalsize\bfseries}
+\titlespacing*{\section}{0pt}{12bp plus 2pt minus 1pt}{7.25bp}
+\titlespacing*{\subsection}{0pt}{9bp plus 1pt minus 1pt}{5bp}
+
+\usepackage{amsmath}
+\usepackage{unicode-math}
+\setmathfont{STIX Two Math}
+\numberwithin{equation}{section}
+\thickmuskip=5mu plus 1mu\relax
+
+\usepackage{graphicx}
+\usepackage{caption}
+\captionsetup{font=small,labelfont=bf,labelsep=period,
+  justification=RaggedRight,singlelinecheck=false,skip=8bp}
+\usepackage{placeins}
+\renewcommand{\topfraction}{0.85}
+\renewcommand{\bottomfraction}{0.7}
+\renewcommand{\textfraction}{0.1}
+\renewcommand{\floatpagefraction}{0.85}
+\usepackage{wrapfig}
+\setlength{\columnsep}{14bp}
+\setlength{\intextsep}{8bp plus 2bp minus 2bp}
+\setlength{\textfloatsep}{14bp plus 2bp minus 2bp}
+
+\usepackage[backend=biber,style=ieee,sorting=none]{biblatex}
+\addbibresource{bibliography/references.bib}
+\renewcommand*{\bibfont}{\small}
+\renewcommand*{\multicitedelim}{\addcomma\addnbspace}
+\setcounter{biburlnumpenalty}{9000}
+\setcounter{biburllcpenalty}{9000}
+\setcounter{biburlucpenalty}{9000}
+\newif\ifreporthasreferences
+\AtDataInput{\global\reporthasreferencestrue}
+
+\usepackage{xurl}
+\Urlmuskip=0mu\relax
+\usepackage[hidelinks]{hyperref}
+\urlstyle{same}
+\hypersetup{pdftitle={\reporttitle},pdfauthor={\reportauthor}}
+
+\newcommand{\placeholder}[1]{{\itshape[#1]}\par}
+\newcommand{\reportfigure}[2]{%
+  \IfFileExists{figures/#1}{%
+    \includegraphics[width=\linewidth,height=0.62\textheight,
+      keepaspectratio]{figures/#1}%
+  }{%
+    \fbox{\parbox[c][2.25in][c]{0.94\linewidth}{%
+      \centering\textit{Figure placeholder}\par #2\par
+      \small\texttt{\detokenize{#1}}}}%
+  }%
+}

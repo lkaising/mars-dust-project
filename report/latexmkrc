@@ -1,0 +1,10 @@
+# One document; XeLaTeX embeds the installed Times New Roman font.
+@default_files = ('report.tex');
+$pdf_mode = 5;
+$xelatex = 'xelatex -interaction=nonstopmode -halt-on-error -file-line-error -synctex=1 %O %S';
+$out_dir = 'build';
+# Let latexmk run Biber when citations change, and clean its generated files.
+$bibtex_use = 2;
+$clean_ext = 'synctex.gz synctex.gz(busy)';
+# Continuous builds update the PDF; opening a viewer is a separate choice.
+$preview_continuous_mode = 0;

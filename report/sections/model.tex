@@ -1,0 +1,29 @@
+% !TeX root = ../report.tex
+\section{Mathematical model}
+\label{sec:model}
+
+The model is spatially lumped, with no geography and two state variables. Atmospheric dust $A$ is the dust optical depth, a dimensionless measure of how strongly airborne dust blocks sunlight. Available surface dust $S$ is the fraction of liftable dust remaining in the source-region reservoir, from 0 (empty) to 1 (full), not all dust on the surface. Time $t$ is in sols (Martian days), with $P = 669$ sols per Mars year:
+\begin{equation}
+  \frac{dA}{dt} = \frac{A_b}{T_s} + L(A,S,F) - \frac{A}{T_s}, \qquad
+  \frac{dS}{dt} = \frac{1-S}{P\,T_r} - \lambda\,L(A,S,F).
+  \label{eq:state}
+\end{equation}
+In the atmospheric equation, dust devils and small storms supply background lifting $A_b/T_s$, which alone holds $A$ at the typical background optical depth $A_b = 0.5$; storm lifting $L$ adds more; and settling removes dust with timescale $T_s = 43$ sols, measured at the Curiosity rover site after the 2018 global storm and applied here planet-wide~\cite{smith2019}. In the surface equation, the reservoir replenishes toward $S = 1$ through a prescribed recovery term with replenishment time $T_r$ Mars years ($P\,T_r$ sols), and storm lifting depletes it at the rate $\lambda L$. The same lifting term therefore raises $A$ and lowers $S$; $\lambda$ converts lifted optical depth into reservoir fraction, and settling does not directly refill the reservoir. Lifting requires both available surface dust and wind:
+\begin{equation}
+  L = k\,S\,\Theta(W), \qquad
+  \Theta(W) = \frac{1}{2}\left[1 + \tanh\left(\frac{W - W_t}{\delta}\right)\right], \qquad
+  W = W_0\,F\,(1 + \alpha A)\,e^{-A/A_c}.
+  \label{eq:lifting}
+\end{equation}
+\begin{figure}[t]
+  \centering
+  \reportfigure{climate_record.pdf}{Climate record and single-storm detail}
+  \caption{Variable-seasons simulation (annual forcing factors 0.94--1.06, seed 42). (a)~$A$, $S$, and $F$ over 30 simulated Mars years after a 20-year warm-up, with the $A = 5$ cutoff and the 11 global-event onsets. (b)~The shaded window: 60 sols before to 180 sols after the peak of the second detected event. Rates, in $A$ per sol: dust input $A_b/T_s + L$, settling loss $-A/T_s$, and their sum $dA/dt$.}
+  \label{fig:climate-record}
+\end{figure}%
+The switch $\Theta$ rises smoothly from nearly 0 to 1 as the relative wind strength $W$ passes the lifting threshold $W_t$, but is not exactly zero below it; $W$ is a dimensionless function of $A$ and the seasonal forcing $F$, not a wind speed or third equation. Its factor $1 + \alpha A$ represents dust-heating feedback, in which dusty air absorbs sunlight and drives stronger winds; $e^{-A/A_c}$ represents shading, which weakens surface winds in very dusty air. The seasonal forcing is sunlight relative to its annual mean,
+\begin{equation}
+  F(t) = \left[1 + \varepsilon_F \cos\left(2\pi\left(\frac{t}{P} - \phi_p\right)\right)\right](1 + \eta_n),
+  \label{eq:forcing}
+\end{equation}
+where $\varepsilon_F = 0.18$ makes perihelion forcing 44\% stronger than aphelion forcing, close to the observed 40\% difference in solar flux~\cite{smith2019}, and $\phi_p = 0.70$ sets perihelion's timing. With identical seasons, $\eta_n = 0$; with variable seasons, each model year $n$ draws one $\eta_n$ uniformly from $[-0.06, 0.06]$, scaling that year's curve. The other baseline values are $k = 1.2$ per sol, $\lambda = 0.04$, $T_r = 3$ Mars years, $W_0 = 0.44$, $W_t = 1$, $\delta = 0.05$, $\alpha = 1.7$, and $A_c = 4$.

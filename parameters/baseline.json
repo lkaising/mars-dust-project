@@ -1,0 +1,33 @@
+{
+  "name": "baseline",
+  "description": "Reference parameter set.",
+  "model": {
+    "P": 669,
+    "T_s": 43,
+    "A_b": 0.5,
+    "k": 1.2,
+    "lambda": 0.04,
+    "T_r": 3,
+    "W0": 0.44,
+    "W_t": 1,
+    "delta": 0.05,
+    "alpha": 1.7,
+    "A_c": 4,
+    "eps_F": 0.18,
+    "phi_p": 0.70,
+    "eta_max": 0
+  },
+  "run": {
+    "years": 30,
+    "warmup_years": 20,
+    "A0": 0.5,
+    "S0": 0.9,
+    "seed": 42,
+    "sample_sols": 1,
+    "storm_threshold": 5,
+    "rearm_threshold": 2,
+    "rel_tol": 1e-8,
+    "abs_tol": 1e-10,
+    "max_step_sols": 2
+  }
+}

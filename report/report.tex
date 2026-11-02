@@ -1,0 +1,31 @@
+% !TeX program = xelatex
+\documentclass[12pt,letterpaper]{article}
+
+\input{config/metadata}
+\input{config/preamble}
+
+\begin{document}
+
+{\centering
+  {\large\bfseries\reporttitle\par}
+  \reportauthor\par
+  \reportcourse\par
+  \reportdate\par
+}
+\medskip
+
+\input{sections/introduction}
+\input{sections/model}
+\input{sections/results}
+\FloatBarrier
+\input{sections/discussion}
+\input{sections/conclusion}
+
+\section*{References}
+\ifreporthasreferences
+  \printbibliography[heading=none]
+\else
+  \placeholder{References will appear here after bibliography entries are cited.}
+\fi
+
+\end{document}
